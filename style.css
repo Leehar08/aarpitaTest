@@ -29,7 +29,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--light-blue-bg);
     margin: 0;
-    padding-top: 100px; /* Space for the fixed header */
+    padding-top: 140px; /* Adjusted: This should comfortably clear the fixed header */
     color: var(--dark-text);
     line-height: 1.6;
     display: flex;
@@ -47,14 +47,15 @@ body {
     width: 100%;
     background: linear-gradient(to right, #004085, #007bff); /* Gradient background */
     color: var(--white);
-    padding: 15px 20px;
+    padding: 15px 20px 0; /* Adjusted: Removed bottom padding from this part */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     z-index: 1000;
     display: flex;
+    flex-direction: column; /* Changed to column to stack header content and status */
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-height: 80px; /* Ensure sufficient height for content */
+    min-height: auto; /* Allow height to adjust based on content */
 }
 
 .header-content {
@@ -63,7 +64,7 @@ body {
     justify-content: space-between; /* Distribute items */
     width: 100%;
     max-width: 1300px; /* Wider header content */
-    padding: 0 20px; /* Internal padding */
+    padding: 0 20px 15px; /* Added padding to bottom of header content */
 }
 
 /* Logo and Animation (Left) */
@@ -170,6 +171,46 @@ body {
     100% { transform: scale(1); opacity: 0.8; }
 }
 
+/* NEW: Quiz Status Bar */
+.quiz-status {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2); /* Slightly transparent dark background */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--white);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.status-item {
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+.progress-bar-container {
+    width: 300px; /* Adjust width as needed */
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Will be controlled by JS */
+    background-color: #4CAF50; /* Green color for progress */
+    border-radius: 5px;
+    transition: width 0.3s ease-out;
+}
+/* END NEW */
+
+
 /* Main Content Container */
 .main-content {
     width: 100%;
@@ -194,7 +235,7 @@ body {
 
 .subject-header {
     position: sticky;
-    top: 90px; /* Adjusted sticking point below fixed main header */
+    top: 130px; /* Adjusted: Sticks 10px below the 140px header */
     background-color: var(--white);
     color: var(--dark-blue); /* Deeper blue for subject header */
     padding: 18px 30px; /* Larger padding */
@@ -451,7 +492,7 @@ body {
 @media (max-width: 992px) {
     .header-content {
         max-width: 900px;
-        padding: 0 15px;
+        padding: 0 15px 15px; /* Adjusted padding */
     }
 
     .logo-title h1 {
@@ -465,6 +506,15 @@ body {
     .kuhi-text {
         font-size: 0.9em;
     }
+
+    .quiz-status {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+    .progress-bar-container {
+        width: 200px;
+    }
+
 
     .main-content {
         max-width: 760px;
@@ -480,6 +530,7 @@ body {
         font-size: 1.7em;
         padding: 15px 25px;
         margin: 0 -30px 20px;
+        top: 130px; /* Adjusted: Sticks 10px below the 140px header */
     }
 
     .question-card {
@@ -501,14 +552,14 @@ body {
 @media (max-width: 768px) {
     .fixed-header {
         flex-direction: column; /* Stack header elements vertically */
-        padding: 10px 10px;
+        padding: 10px 10px 0; /* Adjusted padding */
         min-height: auto; /* Allow height to adjust */
     }
     .header-content {
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        padding: 0;
+        padding: 0 0 10px; /* Adjusted padding */
         width: 100%; /* Take full width */
     }
 
@@ -549,8 +600,24 @@ body {
         font-size: 0.8em;
     }
 
+    .quiz-status {
+        flex-wrap: wrap; /* Allow items to wrap on small screens */
+        justify-content: center;
+        gap: 5px 10px; /* Add gap between wrapped items */
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    .status-item {
+        padding: 0 5px;
+    }
+    .progress-bar-container {
+        width: 90%; /* Make progress bar almost full width */
+        margin: 10px 0 0; /* Center it */
+    }
+
+
     body {
-        padding-top: 130px; /* Adjust padding for the new header height */
+        padding-top: 180px; /* Adjusted: For taller stacked header on mobile */
     }
 
     .main-content {
@@ -566,7 +633,7 @@ body {
         font-size: 1.4em;
         padding: 12px 15px;
         margin: 0 -20px 15px; /* Match quiz-container padding for margin */
-        top: 120px; /* Adjust sticky top for smaller header */
+        top: 170px; /* Adjusted: Sticks 10px below the 180px header on mobile */
     }
 
     .question-card {
@@ -621,5 +688,65 @@ body {
     }
     .total-score-summary {
         font-size: 1.2em !important;
+    }
+}
+
+/* Clapping Animation */
+#clapping-animation-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 9999; /* Ensure it's on top of everything */
+    opacity: 0;
+    visibility: hidden;
+    /* transition for smooth showing/hiding the container itself */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+#clapping-animation-container.animate-clapping {
+    opacity: 1;
+    visibility: visible;
+}
+
+.clapping-emoji {
+    font-size: 15em; /* Start very big */
+    opacity: 1; /* Start fully visible */
+    transform: scale(1);
+    /* The animation itself, 'forwards' keeps the end state */
+    animation: clapFadeOut 1.8s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
+    text-shadow: 0 0 20px rgba(255, 255, 0, 0.7), 0 0 40px rgba(255, 255, 0, 0.5); /* Subtle glow */
+}
+
+@keyframes clapFadeOut {
+    0% {
+        font-size: 15em; /* Initial size */
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        font-size: 1em; /* End size (small) */
+        opacity: 0; /* Fully faded */
+        transform: scale(0.1); /* Much smaller */
+    }
+}
+
+/* Optional: Adjust for smaller screens if emoji is too big initially */
+@media (max-width: 768px) {
+    .clapping-emoji {
+        font-size: 10em; /* Smaller initial size on mobile */
+    }
+    @keyframes clapFadeOut {
+        0% {
+            font-size: 10em;
+        }
+        100% {
+            font-size: 0.8em;
+        }
     }
 }

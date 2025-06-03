@@ -3512,7 +3512,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- END OF YOUR JSON DATA ---
 
 
-    const subjects = {
+   const subjects = {
         physics: { name: "Physics", questions: physicsQuestions, score: 0 },
         chemistry: { name: "Chemistry", questions: chemistryQuestions, score: 0 },
         biology: { name: "Biology", questions: biologyQuestions, score: 0 },
@@ -3524,6 +3524,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const finalSubmitBtn = document.getElementById('final-submit-btn');
     const restartQuizBtn = document.getElementById('restart-quiz-btn');
     const summaryResultsDiv = document.getElementById('summary-results');
+   const feedbackDiv = document.getElementById('feedback-message');
+const clappingContainer = document.getElementById('clapping-animation-container');
+
 
     function renderQuestionsForSubject(subjectId, subjectData) {
         const questionsListDiv = document.querySelector(`.questions-list[data-subject="${subjectId}"]`);
@@ -3607,6 +3610,8 @@ document.addEventListener('DOMContentLoaded', function() {
             questionCard.appendChild(doneBtn);
 
             // Event listener for the 'Done' button
+            // Locate this section in your script.js (around where userAnswer is declared):
+
             doneBtn.addEventListener('click', function() {
                 const clickedSubjectId = this.dataset.subjectId;
                 const clickedQuestionIndex = parseInt(this.dataset.questionIndex);
@@ -3621,7 +3626,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 const userAnswer = selectedOption.value;
-                const correctAnswerKey = currentQuestion.correct_answer_key;
+
+                // --- START OF REQUIRED CHANGE ---
+                // Safely extract the single-letter correct answer key from currentQuestion.answer
+                let correctAnswerKey = currentQuestion.answer;
+                // This regex looks for a single character (letter or number) inside parentheses at the start of the string
+                const match = correctAnswerKey.match(/^\((\w)\)/); 
+                if (match && match[1]) {
+                    correctAnswerKey = match[1]; // If a match is found, use the extracted character
+                }
+                // At this point, correctAnswerKey will *always* be just 'a', 'b', 'c', or 'd'
+                // --- END OF REQUIRED CHANGE ---
+
 
                 // Mark the question as answered
                 questionCard.dataset.answered = 'true';
@@ -3644,13 +3660,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // --- Customized Feedback Messages ---
+
                 if (userAnswer === correctAnswerKey) {
                     subjects[clickedSubjectId].score++; // Increment score for the subject
-                    feedbackDiv.textContent = 'You are doing great Kuhi!';
+                    feedbackDiv.textContent = 'You are doing great Kuhi!🔥';
                     feedbackDiv.className = 'feedback correct-feedback';
+
+                    // --- START OF CLAPPING ANIMATION TRIGGER ---
+                    if (clappingContainer) { // Check if the element exists
+                        clappingContainer.classList.add('animate-clapping');
+                        // Remove the animation class after it completes to reset for next time
+                        setTimeout(() => {
+                            clappingContainer.classList.remove('animate-clapping');
+                        }, 1800); // This duration should be slightly longer than the CSS animation (1.8s)
+                    }
+                    // --- END OF CLAPPING ANIMATION TRIGGER ---
+
                 } else {
-                    feedbackDiv.textContent = 'No worries Kuhi, keep going!'; // Simplified for incorrect
+                    // Explicitly show the correct answer for incorrect attempts
+                    feedbackDiv.textContent = `No worries Kuhi, keep going!🤗 The correct answer was: ${currentQuestion.options[correctAnswerKey]}`;
                     feedbackDiv.className = 'feedback incorrect-feedback';
                 }
                 // --- End Customized Feedback Messages ---
