@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AARPITA EXAM PREP - Interactive Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet"> </head>
+<body>
+
+    <header class="fixed-header">
+        <div class="header-content">
+            <div class="logo-title">
+                <h1>AARPITA EXAM PREP</h1>
+            </div>
+
+            <div class="animation-main">
+                <span class="flashy-text">ALL THE BEST AARPITA</span>
+            </div>
+
+            <div class="animation-kuhi-container">
+                <span class="kuhi-text">Designed for Kuhi</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="quiz-container" id="quiz-main-container">
+            <div class="subject-section" id="physics-section">
+                <h2 class="subject-header">Physics</h2>
+                <div class="questions-list" data-subject="physics">
+                    </div>
+            </div>
+
+            <div class="subject-section" id="chemistry-section">
+                <h2 class="subject-header">Chemistry</h2>
+                <div class="questions-list" data-subject="chemistry">
+                    </div>
+            </div>
+
+            <div class="subject-section" id="biology-section">
+                <h2 class="subject-header">Biology</h2>
+                <div class="questions-list" data-subject="biology">
+                    </div>
+            </div>
+
+            <div class="subject-section" id="english-section">
+                <h2 class="subject-header">English</h2>
+                <div class="questions-list" data-subject="english">
+                    </div>
+            </div>
+
+            <div class="quiz-action-area">
+                <button id="final-submit-btn" class="button primary-button">Submit All & See Results</button>
+            </div>
+        </div>
+
+        <div class="quiz-summary" id="quiz-summary" style="display:none;">
+            <div class="summary-header">
+                <h2>Quiz Summary</h2>
+                <p class="summary-quote">"You are doing great, keep going!"</p>
+            </div>
+            <div id="summary-results">
+                </div>
+            <button id="restart-quiz-btn" class="button secondary-button">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

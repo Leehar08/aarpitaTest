@@ -1,0 +1,625 @@
+/* Color Palette */
+:root {
+    --primary-blue: #007bff;
+    --dark-blue: #004085; /* Deeper blue for header */
+    --light-blue-bg: #e0f7fa; /* Very light cyan for background */
+    --white: #ffffff;
+    --light-gray: #f8f9fa; /* Lighter off-white for cards */
+    --medium-gray: #e9ecef; /* For borders and subtle division */
+    --dark-text: #343a40; /* Darker text for readability */
+    --green-correct: #28a745;
+    --light-green-bg: #d4edda;
+    --red-incorrect: #dc3545;
+    --light-red-bg: #f8d7da;
+    --selected-bg: #e2f2ff; /* Softer selected blue */
+    --selected-border: #90caf9; /* Medium blue for selected border */
+
+    /* Shades of Blue for Logo Animation */
+    --blue-lightest: #e0f2f7;
+    --blue-lighter: #b3e5fc;
+    --blue-light: #81d4fa;
+    --blue-medium: #4fc3f7;
+    --blue-dark: #29b6f6;
+    --blue-darker: #0288d1;
+    --blue-darkest: #01579b;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-blue-bg);
+    margin: 0;
+    padding-top: 100px; /* Space for the fixed header */
+    color: var(--dark-text);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+/* Fixed Header */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, #004085, #007bff); /* Gradient background */
+    color: var(--white);
+    padding: 15px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 80px; /* Ensure sufficient height for content */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items */
+    width: 100%;
+    max-width: 1300px; /* Wider header content */
+    padding: 0 20px; /* Internal padding */
+}
+
+/* Logo and Animation (Left) */
+.logo-title {
+    flex-shrink: 0; /* Prevent shrinking */
+    padding-right: 20px; /* Space from center element */
+}
+
+.logo-title h1 {
+    font-family: 'Dancing Script', cursive; /* Cursive font for logo */
+    margin: 0;
+    font-size: 2.8em; /* Larger logo */
+    letter-spacing: 1px; /* Adjust letter spacing for cursive */
+    font-weight: 700; /* Bold for visibility */
+    text-shadow: 0 0 5px rgba(255,255,255,0.7); /* Subtle white glow */
+    animation: blueNeonGlow 3s infinite alternate, scaleBounce 1.5s infinite alternate; /* Blue-only animation */
+    line-height: 1; /* Prevent extra space */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+@keyframes blueNeonGlow {
+    0% {
+        color: var(--blue-lighter);
+        text-shadow: 0 0 5px var(--blue-lighter), 0 0 10px var(--blue-light), 0 0 20px var(--blue-medium), 0 0 40px var(--blue-medium);
+    }
+    25% {
+        color: var(--blue-light);
+        text-shadow: 0 0 5px var(--blue-light), 0 0 10px var(--blue-medium), 0 0 20px var(--blue-dark), 0 0 40px var(--blue-dark);
+    }
+    50% {
+        color: var(--blue-medium);
+        text-shadow: 0 0 5px var(--blue-medium), 0 0 10px var(--blue-dark), 0 0 20px var(--blue-darker), 0 0 40px var(--blue-darker);
+    }
+    75% {
+        color: var(--blue-dark);
+        text-shadow: 0 0 5px var(--blue-dark), 0 0 10px var(--blue-darker), 0 0 20px var(--blue-darkest), 0 0 40px var(--blue-darkest);
+    }
+    100% {
+        color: var(--blue-lighter);
+        text-shadow: 0 0 5px var(--blue-lighter), 0 0 10px var(--blue-light), 0 0 20px var(--blue-medium), 0 0 40px var(--blue-medium);
+    }
+}
+
+@keyframes scaleBounce {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.02); }
+}
+
+
+/* "All the Best" Animation (Center - Simple & Visible) */
+.animation-main {
+    flex-grow: 1; /* Allows it to take up available space in the middle */
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden; /* Hide anything that goes outside */
+    padding: 0 10px; /* Small padding */
+}
+
+.flashy-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em; /* Larger and more prominent */
+    font-weight: 700;
+    color: #ffd700; /* Gold color */
+    text-shadow: 0 0 8px #ffd700, 0 0 15px #ffd700, 0 0 30px #ffea00; /* Brighter neon glow */
+    animation: simplePulse 2s infinite alternate; /* Simpler pulse animation */
+    white-space: nowrap; /* Keep text on one line */
+    position: relative; /* Position relative to allow centering without absolute */
+    transform: none; /* Reset any previous transforms */
+}
+
+@keyframes simplePulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+
+/* "Designed for Kuhi" Animation (Right) */
+.animation-kuhi-container {
+    width: 180px; /* Fixed width for consistent positioning */
+    text-align: right;
+    display: flex;
+    justify-content: flex-end; /* Align right */
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent shrinking */
+    padding-left: 20px; /* Space from center element */
+}
+
+.kuhi-text {
+    font-family: 'Pacifico', cursive; /* More whimsical font */
+    font-size: 1em; /* Slightly larger */
+    color: #ffb6c1; /* Light pink color */
+    text-shadow: 0 0 5px #ff69b4; /* Pink glow */
+    animation: kuhiPulse 2s infinite ease-in-out;
+}
+
+@keyframes kuhiPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Main Content Container */
+.main-content {
+    width: 100%;
+    max-width: 950px; /* Further increased max-width for spacious layout */
+    margin: 30px auto;
+    padding: 0 20px; /* Increased side padding */
+    box-sizing: border-box;
+}
+
+.quiz-container {
+    background-color: var(--white);
+    padding: 30px 40px; /* Adjusted padding for better flow */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+    text-align: center;
+}
+
+/* Subject Sections */
+.subject-section {
+    margin-bottom: 50px; /* More space between sections */
+}
+
+.subject-header {
+    position: sticky;
+    top: 90px; /* Adjusted sticking point below fixed main header */
+    background-color: var(--white);
+    color: var(--dark-blue); /* Deeper blue for subject header */
+    padding: 18px 30px; /* Larger padding */
+    margin: 0 -40px 25px; /* Match quiz-container padding */
+    border-bottom: 4px solid var(--primary-blue); /* Thicker border */
+    font-size: 1.9em; /* Larger font size */
+    font-weight: 700;
+    text-align: left;
+    z-index: 998;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0; /* More rounded top corners */
+    letter-spacing: 0.5px;
+}
+
+/* Question Cards */
+.question-card {
+    background-color: var(--light-gray);
+    border: 1px solid var(--medium-gray);
+    border-radius: 12px; /* Consistent rounded corners */
+    padding: 30px; /* More internal padding */
+    margin-bottom: 30px; /* More space between cards */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Smoother shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.question-card:hover:not(.answered) {
+    transform: translateY(-5px); /* More pronounced hover effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.question-card h2 {
+    font-size: 1.4em; /* Slightly larger question text */
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--dark-text);
+    line-height: 1.5;
+}
+
+/* Options */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Consistent gap */
+    margin-bottom: 25px;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    padding: 14px 20px; /* Increased padding for options */
+    border: 1px solid #cce7ff;
+    border-radius: 10px; /* More rounded */
+    cursor: pointer;
+    font-size: 1.05em;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.option-label:hover:not(.answered .option-label) {
+    background-color: var(--selected-bg); /* Use selected bg for hover */
+    border-color: var(--selected-border);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.option-label.selected {
+    background-color: var(--selected-bg);
+    border-color: var(--selected-border);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+.option-label.correct {
+    background-color: var(--light-green-bg);
+    border-color: var(--green-correct);
+    color: var(--green-correct);
+    font-weight: 600;
+}
+
+.option-label.incorrect {
+    background-color: var(--light-red-bg);
+    border-color: var(--red-incorrect);
+    color: var(--red-incorrect);
+    font-weight: 600;
+}
+
+.option-label input[type="radio"] {
+    margin-right: 18px; /* More space */
+    transform: scale(1.5); /* Larger radio buttons */
+    accent-color: var(--primary-blue);
+    cursor: pointer;
+}
+
+.question-card.answered .option-label {
+    cursor: default;
+    pointer-events: none;
+    user-select: none; /* Prevent accidental text selection */
+}
+.question-card.answered .option-label:hover {
+    background-color: var(--white); /* Revert to default for answered */
+    border-color: #cce7ff;
+    box-shadow: none;
+}
+
+
+/* Feedback */
+.feedback {
+    font-size: 1.15em; /* Slightly larger feedback */
+    margin-top: 20px; /* More space */
+    min-height: 28px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.feedback.correct-feedback {
+    color: var(--green-correct);
+}
+
+.feedback.incorrect-feedback {
+    color: var(--red-incorrect);
+}
+
+/* Buttons */
+.button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 14px 30px; /* Larger buttons */
+    border: none;
+    border-radius: 10px; /* More rounded */
+    font-size: 1.15em; /* Larger font */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    width: auto;
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 0.8px; /* More pronounced letter spacing */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.button:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(-3px); /* More pronounced hover */
+    box-shadow: 0 7px 18px rgba(0,0,0,0.2);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Specific button styles */
+.primary-button {
+    background-color: #008CBA; /* A vibrant blue for main action */
+}
+
+.primary-button:hover {
+    background-color: #007099;
+}
+
+.secondary-button {
+    background-color: #6c757d; /* Muted grey for restart */
+}
+
+.secondary-button:hover {
+    background-color: #5a6268;
+}
+
+.quiz-action-area {
+    margin-top: 50px; /* More space before final button */
+    padding-top: 30px;
+    border-top: 1px solid var(--medium-gray);
+    text-align: center;
+}
+
+/* Quiz Summary Section */
+.quiz-summary {
+    background-color: var(--white);
+    padding: 50px; /* More generous padding */
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    margin-top: 30px;
+}
+
+.summary-header {
+    margin-bottom: 40px;
+}
+
+.quiz-summary h2 {
+    color: var(--dark-blue);
+    font-size: 2.5em; /* Larger summary title */
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.summary-quote {
+    font-family: 'Pacifico', cursive; /* Elegant font for quote */
+    font-size: 1.5em; /* Larger quote */
+    color: #6a0dad; /* A nice purple color */
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#summary-results {
+    margin-bottom: 40px; /* More space below results */
+    font-size: 1.2em; /* Larger text in summary */
+    line-height: 2;
+}
+
+#summary-results p {
+    margin: 12px 0;
+    padding: 10px 20px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--medium-gray);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+#summary-results strong {
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+
+#summary-results .correct-score {
+    color: var(--green-correct);
+    font-weight: 800; /* Extra bold for score */
+    font-size: 1.1em; /* Make score stand out */
+}
+
+.total-score-summary {
+    font-size: 1.4em !important; /* Emphasize total score */
+    font-weight: 700;
+    padding: 15px 25px !important;
+    background-color: #e6f7ff !important; /* Lighter blue for total score */
+    border-color: var(--primary-blue) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+/* ------------------------------------------------------------- */
+/* Responsive Adjustments */
+/* ------------------------------------------------------------- */
+
+/* General adjustments for smaller screens (e.g., tablets and large mobiles) */
+@media (max-width: 992px) {
+    .header-content {
+        max-width: 900px;
+        padding: 0 15px;
+    }
+
+    .logo-title h1 {
+        font-size: 2.2em;
+    }
+
+    .flashy-text {
+        font-size: 1.2em;
+    }
+
+    .kuhi-text {
+        font-size: 0.9em;
+    }
+
+    .main-content {
+        max-width: 760px;
+        margin: 25px auto;
+        padding: 0 15px;
+    }
+
+    .quiz-container {
+        padding: 25px 30px;
+    }
+
+    .subject-header {
+        font-size: 1.7em;
+        padding: 15px 25px;
+        margin: 0 -30px 20px;
+    }
+
+    .question-card {
+        padding: 25px;
+        margin-bottom: 25px;
+    }
+
+    .question-card h2 {
+        font-size: 1.3em;
+    }
+
+    .option-label {
+        padding: 12px 18px;
+        font-size: 1em;
+    }
+}
+
+/* Mobile-specific adjustments (e.g., phones) */
+@media (max-width: 768px) {
+    .fixed-header {
+        flex-direction: column; /* Stack header elements vertically */
+        padding: 10px 10px;
+        min-height: auto; /* Allow height to adjust */
+    }
+    .header-content {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 0;
+        width: 100%; /* Take full width */
+    }
+
+    .logo-title, .animation-main, .animation-kuhi-container {
+        width: 100%; /* Full width for stacking */
+        padding: 5px 0; /* Adjust padding */
+        text-align: center; /* Center content */
+        justify-content: center; /* Ensure content is centered */
+        order: unset; /* Reset order for flexible stacking */
+        flex-shrink: unset; /* Allow shrinking */
+    }
+
+    .logo-title {
+        order: 1; /* Logo first */
+        margin-bottom: 5px;
+    }
+    .logo-title h1 {
+        font-size: 1.8em; /* Smaller logo */
+    }
+
+    .animation-main {
+        order: 2; /* Main animation second */
+        min-width: unset; /* Remove min-width */
+        padding: 0; /* Remove internal padding if stacking */
+    }
+    .flashy-text {
+        font-size: 1em; /* Smaller text */
+        position: relative; /* Keep relative positioning */
+        transform: none; /* No horizontal translate on small screens */
+        animation: simplePulse 1.5s infinite alternate; /* Keep simple pulse */
+    }
+
+    .animation-kuhi-container {
+        order: 3; /* Kuhi animation last */
+        margin-top: 5px;
+    }
+    .kuhi-text {
+        font-size: 0.8em;
+    }
+
+    body {
+        padding-top: 130px; /* Adjust padding for the new header height */
+    }
+
+    .main-content {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .quiz-container {
+        padding: 20px;
+    }
+
+    .subject-header {
+        font-size: 1.4em;
+        padding: 12px 15px;
+        margin: 0 -20px 15px; /* Match quiz-container padding for margin */
+        top: 120px; /* Adjust sticky top for smaller header */
+    }
+
+    .question-card {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .question-card h2 {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+    }
+
+    .options-container {
+        gap: 10px;
+    }
+
+    .option-label {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+
+    .option-label input[type="radio"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+    }
+
+    .feedback {
+        font-size: 1em;
+        margin-top: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .quiz-action-area {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+
+    .quiz-summary {
+        padding: 25px;
+    }
+    .quiz-summary h2 {
+        font-size: 2em;
+    }
+    .summary-quote {
+        font-size: 1.1em;
+    }
+    #summary-results p {
+        font-size: 0.95em;
+    }
+    .total-score-summary {
+        font-size: 1.2em !important;
+    }
+}
