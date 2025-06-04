@@ -3759,3 +3759,4 @@ const clappingContainer = document.getElementById('clapping-animation-container'
         quizMainContainer.style.display = 'block'; // Show quiz
     });
 });
+
